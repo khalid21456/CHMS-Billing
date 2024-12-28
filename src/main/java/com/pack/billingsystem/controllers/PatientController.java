@@ -22,13 +22,13 @@ public class PatientController {
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, id);
             try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
+                    rs.next();
                     patient = new Patient();
                     patient.setPourcentageAssurance(rs.getDouble("assurance"));
                     patient.setPrenom(rs.getString("prenom_patient"));
                     patient.setNom(rs.getString("nom_patient"));
                     patient.setTelephone(rs.getString("tel"));
-                }
+
             }
         }
         return patient;
@@ -39,10 +39,11 @@ public class PatientController {
         Connection connection = DatabaseConnection.getConnection();
 
         Statement statement = connection.createStatement();
-        ResultSet set = statement.executeQuery("SELECT * FROM PATIENT WHERE IDPatient = "+id);
+        ResultSet set = statement.executeQuery("SELECT * FROM PATIENT INNER JOIN insurance ON Patient.IDInsurance = insurance.IDInsurance WHERE IDPatient = "+id);
         Patient patient = new Patient();
         set.next();
         patient.setIdPatient(set.getInt("IDPatient"));
+        patient.setPourcentageAssurance(set.getDouble("Pourcentage"));
         patient.setNom(set.getString("Nom"));
         patient.setPrenom(set.getString("Prenom"));
         patient.setTelephone(set.getString("Tel"));

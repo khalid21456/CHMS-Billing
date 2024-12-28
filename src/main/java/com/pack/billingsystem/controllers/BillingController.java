@@ -21,7 +21,7 @@ public class BillingController {
     private boolean isPatientDetailsVisible = false;
     private boolean isTestLabDetailsVisible = false;
     private boolean isMedicationsDetailsVisible = false;
-    private int patientID;
+    private int patientID = 1173;
 
     public BillingController(int patientID) {
         this.patientID = patientID;
@@ -45,7 +45,7 @@ public class BillingController {
         testPriceTextLabel.setText(String.format("%.2f DH",PrixController.updatePriceTest(patientID)));
         medicationPriceTextLabel.setText(String.format("%.2f DH", PrixController.updatePriceMedicaments(patientID)));
 
-        Patient patient = PatientController.getPatientById(patientID);
+        Patient patient = PatientController.getPatient(patientID);
         patientNameLabel.setText(patient.getNom()+" "+patient.getPrenom());
         totalPriceInsuranceLabel.setText(String.format("%.2f DH", PrixController.updateTotalPriceInsurance(patientID,patient.getPourcentageAssurance())));
         totalPriceInsuranceLabel.setVisible(true);
@@ -123,7 +123,6 @@ public class BillingController {
 
     private void updateDetailsGrid(GridPane gridPane) {
         gridPane.getChildren().clear();
-
         if (gridPane == patientDetailsGrid) {
             AppointmentGridController.updateAppointmentGrid(gridPane,patientID);
         } else if (gridPane == testLabDetailsGrid) {

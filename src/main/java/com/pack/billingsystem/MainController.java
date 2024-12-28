@@ -20,11 +20,10 @@ public class MainController {
     private BillingController billingController;
 
     public void switchToBill(MouseEvent event,int idPatient) throws IOException,SQLException {
-        billingController = new BillingController(idPatient);
         root = FXMLLoader.load(getClass().getResource("billing.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        billingController.initialize();
+        billingController = new BillingController();
         stage.setScene(scene);
         stage.show();
     }
