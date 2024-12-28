@@ -1,0 +1,40 @@
+.table-view {
+    -fx-background-color: "#ffffff"; /* Background color for the table */
+    -fx-border-color: "#cccccc";    /* Border color */
+    -fx-border-width: 1px;        /* Border thickness */
+    -fx-font-family: "Poppins";     /* Font family */
+    -fx-font-size: 14px;          /* Font size */
+}
+
+.table-view .column-header-background {
+    -fx-background-color: '#4CAF50'; /* Header background color */
+}
+
+.table-view .column-header {
+    -fx-font-weight: bold;       /* Bold header text */
+    -fx-text-fill: white;        /* Header text color */
+}
+
+.table-row-cell:even {
+    -fx-background-color: '#b3e4f9'; /* Even row background color */
+
+}
+
+.table-row-cell:odd {
+    -fx-background-color: '#ffffff'; /* Odd row background color */
+}
+/*
+.table-row-cell:selected {
+    -fx-background-color: #e2e2e2;
+    -fx-text-fill: #000000;
+}
+*/
+.table-cell {
+    -fx-padding: 10px;           /* Padding inside cells */
+    -fx-border-color: #dddddd;   /* Border between cells */
+    -fx-border-width: 0 0 1px 0; /* Border thickness (bottom only) */
+}
+
+.table-column {
+    -fx-alignment: CENTER; /* Align text in columns */
+}
