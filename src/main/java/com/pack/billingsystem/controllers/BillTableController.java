@@ -7,12 +7,17 @@ import com.pack.billingsystem.models.PatientBillDTO;
 import com.pack.billingsystem.services.BillService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+
+import javax.swing.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Date;
@@ -21,6 +26,12 @@ import java.util.ResourceBundle;
 
 @SuppressWarnings("unused")
 public class BillTableController implements Initializable {
+
+    @FXML
+    public Button searchBtn;
+
+    @FXML
+    public TextField inputSearch;
 
     @FXML
     public TableView<BillRowData> table;
@@ -46,6 +57,8 @@ public class BillTableController implements Initializable {
 
     private MainController mainController = new MainController();
 
+    private SearchController searchController = new SearchController();
+
     public void setRowData() throws SQLException {
         List<Bill> bills = billService.getAllBills();
         List<PatientBillDTO> unpayedBills = billService.getUnpayedBills(bills);
@@ -64,6 +77,25 @@ public class BillTableController implements Initializable {
         table.setItems(list);
     }
 
+    public void setRowData(List<PatientBillDTO> patientBillDTOS) throws SQLException {
+        List<Bill> bills = billService.getAllBills();
+        list.clear();
+        for(PatientBillDTO unpayedBill:patientBillDTOS) {
+            BillRowData row = new BillRowData(
+                    unpayedBill.getBillID(),
+                    unpayedBill.getPatientFirstName(),
+                    unpayedBill.getPatientLastName(),
+                    unpayedBill.getDate(),
+                    unpayedBill.getTel(),
+                    unpayedBill.getPatientID()
+            );
+
+            list.add(row);
+        }
+        table.setItems(list);
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         idBill.setCellValueFactory(new PropertyValueFactory<BillRowData,Integer>("idBill"));
@@ -78,12 +110,10 @@ public class BillTableController implements Initializable {
         }
 
         table.setOnMouseClicked((MouseEvent event) -> {
-            if (event.getClickCount() == 2) { // Double-click
+            if (event.getClickCount() == 2) {
                 BillRowData selectedBill = table.getSelectionModel().getSelectedItem();
                 if (selectedBill != null)  {
                     try {
-                        System.out.println("Selected Bill: " + selectedBill.getNom() + " " + selectedBill.getPrenom());
-                        System.out.println("ID Patient: "+selectedBill.getIdPatient());
                         int patientID = selectedBill.getBillId();
                         if (patientID>0)
                             mainController.switchToBill(event,selectedBill.getIdPatient());
@@ -94,5 +124,23 @@ public class BillTableController implements Initializable {
                 }
             }
         });
+    }
+
+    public void onClickSearch(ActionEvent event) throws SQLException{
+        List<PatientBillDTO> rows =  searchController.onClickSearch(event,inputSearch);
+        setRowData(rows);
+    }
+
+
+
+    public void refresh(ActionEvent event) {
+        try {
+            List<Bill> bills = billService.getAllBills();
+            List<PatientBillDTO> rows = billService.getUnpayedBills(bills);
+            setRowData(rows);
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -5,6 +5,7 @@ module com.pack.billingsystem {
     requires layout;
     requires io;
     requires java.sql;
+    requires java.desktop;
 
 
     opens com.pack.billingsystem to javafx.fxml;

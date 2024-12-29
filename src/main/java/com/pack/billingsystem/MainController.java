@@ -27,7 +27,6 @@ public class MainController {
     }*/
 
     public void switchToBill(MouseEvent event, int patientId) {
-        System.out.println("ID Patient avant l'appel : " + patientId);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("billing.fxml"));
             Parent root = loader.load();

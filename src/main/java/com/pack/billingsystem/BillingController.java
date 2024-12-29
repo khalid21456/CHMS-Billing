@@ -36,7 +36,6 @@ public class BillingController {
 
     public void setPatientID(int patientID) {
         this.patientID = patientID;
-        System.out.println("ID Patient dans setPatientId : " + this.patientID);
 
         try {
             if (this.patientID <= 0) {

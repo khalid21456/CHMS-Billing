@@ -23,12 +23,10 @@
 .table-row-cell:odd {
     -fx-background-color: '#ffffff'; /* Odd row background color */
 }
-/*
+
 .table-row-cell:selected {
-    -fx-background-color: #e2e2e2;
-    -fx-text-fill: #000000;
+    -fx-background-color : '#81C784';
 }
-*/
 .table-cell {
     -fx-padding: 10px;           /* Padding inside cells */
     -fx-border-color: #dddddd;   /* Border between cells */
@@ -37,4 +35,14 @@
 
 .table-column {
     -fx-alignment: CENTER; /* Align text in columns */
+}
+
+.btnRefresh {
+    -fx-background-color: #5A9BD5;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 12px 24px;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+    -fx-border-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 3);
 }
