@@ -12,13 +12,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pack.billingsystem.controllers.BillTableController">
    <children>
-      <Label fx:id="title" layoutX="293.0" layoutY="55.0" text="CarePoint" />
-      <ImageView fitHeight="78.0" fitWidth="67.0" layoutX="216.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="80.0" fitWidth="200.0" layoutX="216.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/Logo.png" />
+            <Image url="@images/logo2.png" />
          </image>
       </ImageView>
-      <Label fx:id="subtitle" layoutX="293.0" layoutY="96.0" text="Health Management System" />
       <TableView fx:id="table" layoutX="213.0" layoutY="191.0" prefHeight="407.0" prefWidth="789.0" scaleShape="false" stylesheets="@stylesheets/billTable.css">
         <columns>
           <TableColumn fx:id="idBill" prefWidth="176.80001831054688" text="Bill id" />

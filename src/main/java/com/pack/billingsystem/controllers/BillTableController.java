@@ -84,7 +84,10 @@ public class BillTableController implements Initializable {
                     try {
                         System.out.println("Selected Bill: " + selectedBill.getNom() + " " + selectedBill.getPrenom());
                         System.out.println("ID Patient: "+selectedBill.getIdPatient());
-                        mainController.switchToBill(event,selectedBill.getIdPatient());
+                        int patientID = selectedBill.getBillId();
+                        if (patientID>0)
+                            mainController.switchToBill(event,selectedBill.getIdPatient());
+                        else System.out.println("Erreur : ID patient Invalide.");
                     }catch(Exception e) {
                         e.printStackTrace();
                     }

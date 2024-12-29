@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<ScrollPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.pack.billingsystem.controllers.BillingController" prefHeight="700.0" prefWidth="1100.0" styleClass="main-pane" stylesheets="@stylesheets/billing.css">
+<ScrollPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.pack.billingsystem.BillingController" prefHeight="700.0" prefWidth="1100.0" styleClass="main-pane" stylesheets="@stylesheets/billing.css">
     <VBox>
         <HBox styleClass="header" spacing="20" alignment="CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
             <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 0 0 0 40;">
@@ -72,7 +72,7 @@
         </HBox>
 
         <HBox styleClass="button-section">
-            <Button text="Retour" styleClass="button" fx:id="backButton" />
+            <Button text="Retour" styleClass="button" fx:id="backButton" onMouseClicked="#switchToListBills" />
             <Region HBox.hgrow="ALWAYS" />
             <Button text="Générer Facture" styleClass="buttonGenerate" fx:id="generateBillButton" onAction="#handleGenerateBillClick" />
         </HBox>

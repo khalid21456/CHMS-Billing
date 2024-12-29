@@ -35,7 +35,7 @@ public class PatientController {
     }
 
 
-    public static Patient getPatient(int id) throws SQLException{
+    /*public static Patient getPatient(int id) throws SQLException{
         Connection connection = DatabaseConnection.getConnection();
 
         Statement statement = connection.createStatement();
@@ -48,6 +48,29 @@ public class PatientController {
         patient.setPrenom(set.getString("Prenom"));
         patient.setTelephone(set.getString("Tel"));
         return patient;
+    }*/
+
+    public static Patient getPatient(int id) throws SQLException {
+        Connection connection = DatabaseConnection.getConnection();
+        String query = "SELECT * FROM Patient INNER JOIN insurance ON Patient.IDInsurance = insurance.IDInsurance WHERE IDPatient = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id);
+            ResultSet set = statement.executeQuery();
+
+            if (set.next()) { // Vérifiez si le ResultSet contient des résultats
+                Patient patient = new Patient();
+                patient.setIdPatient(set.getInt("IDPatient"));
+                patient.setPourcentageAssurance(set.getDouble("Pourcentage"));
+                patient.setNom(set.getString("Nom"));
+                patient.setPrenom(set.getString("Prenom"));
+                patient.setTelephone(set.getString("Tel"));
+                return patient;
+            } else {
+                throw new SQLException("Aucun patient trouvé avec l'ID: " + id);
+            }
+        }
     }
+
 }
 
