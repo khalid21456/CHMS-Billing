@@ -61,6 +61,7 @@ public class BillService {
             tempBill.setDateBill(set.getDate("DateBill"));
             listBills.add(tempBill);
         }
+        connection.close();
         return listBills;
     }
 

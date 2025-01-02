@@ -27,6 +27,7 @@ public class OrdonnanceService {
         ordonnance.setDoctor(resultSet.getInt(2));
         ordonnance.setDateCreation(resultSet.getDate(3));
         ordonnance.setStatus(resultSet.getString(6));
+        connection.close();
         return ordonnance;
     }
 
