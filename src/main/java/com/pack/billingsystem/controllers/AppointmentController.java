@@ -13,7 +13,7 @@ public class AppointmentController {
     public static List<Appointment> getAllAppointments(int patientID) throws SQLException {
         List<Appointment> appointments = new ArrayList<>();
 
-        String query = "SELECT * FROM Appointment WHERE IDPatient = ? AND paye = false ORDER BY appointmentDate DESC";
+        String query = "SELECT * FROM Appointment JOIN Service ON Appointment.IDService = Service.IDService  WHERE IDPatient = ? AND paye = false ORDER BY appointmentDate DESC";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, patientID);
@@ -27,7 +27,7 @@ public class AppointmentController {
                     appointment.setAppointmentDate(rs.getDate("appointmentDate"));
                     appointment.setPrice(rs.getDouble("price"));
                     appointment.setPaye(rs.getBoolean("paye"));
-                    appointment.setService(rs.getString("service"));
+                    appointment.setService(rs.getString("NameService"));
                     appointments.add(appointment);
                 }
             }
@@ -51,13 +51,13 @@ public class AppointmentController {
     public static Appointment getAppointement(int id) throws SQLException{
         Connection connection = DatabaseConnection.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet set = statement.executeQuery("SELECT * FROM APPOINTMENT WHERE IDAppointment = "+id);
+        ResultSet set = statement.executeQuery("SELECT * FROM APPOINTMENT JOIN Service ON Appointment.IDService = Service.IDService WHERE IDAppointment = "+id);
         Appointment appointment = new Appointment();
         set.next();
         appointment.setPaye(set.getBoolean("Paye"));
         appointment.setAppointmentDate(set.getDate("AppointmentDate"));
         appointment.setPrice(set.getDouble("Price"));
-        appointment.setService(set.getString("Service"));
+        appointment.setService(set.getString("NameService"));
         appointment.setStatus(set.getString("Status"));
         return appointment;
     }
