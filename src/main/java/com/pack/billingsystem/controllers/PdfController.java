@@ -31,7 +31,7 @@ public class PdfController {
         document.setMargins(30, 30, 30, 30);
 
         // Ajouter le logo
-        String logoPath = "C:\\Users\\DELL\\IdeaProjects\\Billing-hospital-system\\src\\main\\resources\\com\\pack\\billingsystem\\images\\logo2.png";
+        String logoPath = getClass().getResource("/com/pack/billingsystem/images/logo2.png").getPath();
         ImageData imageData = ImageDataFactory.create(logoPath);
         Image logo = new Image(imageData).setWidth(120).setHeight(40);
         logo.setHorizontalAlignment(HorizontalAlignment.CENTER);
